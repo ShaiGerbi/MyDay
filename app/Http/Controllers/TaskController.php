@@ -14,7 +14,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::all();
+
+        return view('task.index', ['tasks' => $tasks]);
     }
 
     /**
@@ -24,7 +26,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('task.create');
     }
 
     /**
@@ -35,11 +37,16 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $task = Task::create(['name' => $request->name]);
+
+        if($task) {
+            return redirect()->route('tasks.index');
+        }
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified rephp artisan telescope:clear
+    source.
      *
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
@@ -57,7 +64,7 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        return view('task.edit', ['task' => $task]);
     }
 
     /**
@@ -69,7 +76,9 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        $task->update(['name' => $request->name]);
+
+        return redirect()->route('tasks.edit', $task);
     }
 
     /**
@@ -80,6 +89,6 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
     }
 }
