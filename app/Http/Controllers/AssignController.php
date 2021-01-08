@@ -14,7 +14,9 @@ class AssignController extends Controller
      */
     public function index()
     {
-        //
+        $assigns = Assign::all();
+
+        return view('assign.index', ['assigns' => $assigns]);
     }
 
     /**
@@ -24,7 +26,7 @@ class AssignController extends Controller
      */
     public function create()
     {
-        //
+        return view('assign.create');
     }
 
     /**
@@ -35,7 +37,11 @@ class AssignController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $assign = Assign::create(['name' => $request->name]);
+
+        if($assign) {
+            return redirect()->route('assigns.index');
+        }
     }
 
     /**
@@ -57,7 +63,8 @@ class AssignController extends Controller
      */
     public function edit(Assign $assign)
     {
-        //
+
+        return view('assign.edit', ['assign' => $assign]);
     }
 
     /**
@@ -69,7 +76,9 @@ class AssignController extends Controller
      */
     public function update(Request $request, Assign $assign)
     {
-        //
+        $assign->update(['name' => $request->name]);
+
+        return redirect()->route('assigns.index');
     }
 
     /**
@@ -80,6 +89,8 @@ class AssignController extends Controller
      */
     public function destroy(Assign $assign)
     {
-        //
+        $assign->delete();
+
+        return redirect()->route('assigns.index');
     }
 }
