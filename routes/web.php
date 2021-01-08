@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AssignController;
 use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,4 @@ Route::view('/home', 'home')->name('home');
 Route::resource('tasks', TaskController::class);
 Route::resource('assigns', AssignController::class);
 Route::resource('equipment', EquipmentController::class);
+Route::resource('categories', CategoryController::class);
