@@ -14,7 +14,9 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        //
+        $equipment = Equipment::all();
+
+        return view('equipment.index', ['equipment' => $equipment]);
     }
 
     /**
@@ -24,7 +26,7 @@ class EquipmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('equipment.create');
     }
 
     /**
@@ -35,7 +37,11 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $equipment = Equipment::create(['name' => $request->name, 'amount' => $request->amount, 'cost' => $request->cost]);
+
+        if($equipment) {
+            return redirect()->route('equipment.index');
+        }
     }
 
     /**
@@ -57,7 +63,7 @@ class EquipmentController extends Controller
      */
     public function edit(Equipment $equipment)
     {
-        //
+        return view('equipment.edit', ['equipment' => $equipment]);
     }
 
     /**
@@ -69,7 +75,9 @@ class EquipmentController extends Controller
      */
     public function update(Request $request, Equipment $equipment)
     {
-        //
+        $equipment->update(['name' => $request->name, 'amount' => $request->amount, 'cost' => $request->cost]);
+
+        return redirect()->route('equipment.index');
     }
 
     /**
@@ -80,6 +88,8 @@ class EquipmentController extends Controller
      */
     public function destroy(Equipment $equipment)
     {
-        //
+        $equipment->delete();
+
+        return redirect()->route('equipments.index');
     }
 }
