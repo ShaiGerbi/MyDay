@@ -23,6 +23,7 @@
 
             {{-- App Header --}}
             @include('layouts.header')
+            @include('layouts.navigation')
 
             {{-- Page Content --}}
             <v-main>
