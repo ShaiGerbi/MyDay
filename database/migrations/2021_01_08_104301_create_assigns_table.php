@@ -15,7 +15,11 @@ class CreateAssignsTable extends Migration
     {
         Schema::create('assigns', function (Blueprint $table) {
             $table->id();
+
+            $table->string('name');
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

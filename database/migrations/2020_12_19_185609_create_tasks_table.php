@@ -15,7 +15,14 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+
+            $table->string('name');
+            $table->enum('color', ['green', 'yellow', 'red', 'blue'])->nullable();
+            $table->unsignedTinyInteger('priority')->default(0);
+            $table->text('notes')->nullable();
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

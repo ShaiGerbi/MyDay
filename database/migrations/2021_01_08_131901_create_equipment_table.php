@@ -15,7 +15,13 @@ class CreateEquipmentTable extends Migration
     {
         Schema::create('equipment', function (Blueprint $table) {
             $table->id();
+
+            $table->string('name');
+            $table->unsignedInteger('amount')->nullable();
+            $table->unsignedDecimal('cost',6,2)->nullable();
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
